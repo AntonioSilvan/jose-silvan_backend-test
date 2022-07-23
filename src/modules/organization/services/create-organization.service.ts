@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Organization } from '../domain/organization.entity';
 import { CreateOrganizationDto } from '../domain/create-organization.dto';
-import { CreateOrganization } from '../interfaces/services/create-organization.interface';
+import { ICreateOrganizationService } from '../interfaces/services/create-organization.interface';
 
 @Injectable()
-export class CreateOrganizationService implements CreateOrganization{
+export class CreateOrganizationService implements ICreateOrganizationService{
     constructor(
        @InjectRepository(Organization) private organizationRepository: Repository<Organization>
     ) {}

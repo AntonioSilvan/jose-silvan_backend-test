@@ -1,9 +1,17 @@
-import { Controller, Inject, Post, Body, UsePipes, Param } from '@nestjs/common';
+import {Controller, Inject, Post, Body, UsePipes, Param, ValidationPipe} from '@nestjs/common';
 import { CreateOrganizationDto} from "../domain/create-organization.dto";
-import { TYPES } from '../interfaces/types';
-import { CreateOrganizationApplication } from "../interfaces/services/create-organization.interface";
+import { ICreateOrganizationApplication } from "../interfaces/applications/create-organization.interface";
 
 @Controller('create-organization')
 export class CreateOrganizationController {
+    constructor(
+        @Inject('ICreateOrganizationApplication') private createOrganizationApplication: ICreateOrganizationApplication
+    ) {}
 
+    //@UsePipes(new ValidationPipe(CreateOrganizationDto))
+    @Post()
+    async create(@Body() createOrganizationDto: CreateOrganizationDto): Promise<CreateOrganizationDto> {
+        const organization = await this.createOrganizationApplication.create(createOrganizationDto);
+        return organization;
+    }
 }
