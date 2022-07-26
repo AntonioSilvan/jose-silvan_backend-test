@@ -14,6 +14,16 @@ export class GetRepositoryMetricsService implements IGetRepositoryMetricsService
 
     async getMetrics(idTribe: number) {
         return this.repositoriesRepository.createQueryBuilder('repository')
-            .leftJoinAndSelect(Tribes, 'tribes', 'repository.id_repository = tribes.')
+            .select('repository.id_repository', 'id')
+            .addSelect('repository.name', 'name')
+            .addSelect('tribes.name', 'tribe')
+            .addSelect('organizations.name', 'organization')
+            .addSelect('metrics.coverage')
+            //.addSelect('metrics.code_smells')
+            .leftJoin('repository.tribe', 'tribes')
+            .leftJoin('tribes.organization', 'organizations')
+            .leftJoin('repository.metric', 'metrics')
+            //.where('tribe.id_tribe = :id')
+            .getRawMany();
     }
 }

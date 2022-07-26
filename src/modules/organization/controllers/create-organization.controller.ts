@@ -8,7 +8,6 @@ export class CreateOrganizationController {
         @Inject('ICreateOrganizationApplication') private createOrganizationApplication: ICreateOrganizationApplication
     ) {}
 
-    //@UsePipes(new ValidationPipe(CreateOrganizationDto))
     @Post()
     async create(@Body() createOrganizationDto: CreateOrganizationDto): Promise<CreateOrganizationDto> {
         const organization = await this.createOrganizationApplication.create(createOrganizationDto);

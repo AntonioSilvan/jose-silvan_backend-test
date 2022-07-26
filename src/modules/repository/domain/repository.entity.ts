@@ -1,6 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, OneToMany} from "typeorm";
 import { Tribes} from "../../tribe/domain/tribe.entity";
-import { Metrics } from "../../metrics/domain/metrics.entity";
 
 @Entity()
 export class Repositories {
