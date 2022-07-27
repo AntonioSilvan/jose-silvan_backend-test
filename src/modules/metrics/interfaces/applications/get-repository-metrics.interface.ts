@@ -1,4 +1,4 @@
 export interface IGetRepositoryMetricsApplication {
     getMetrics(idTribe: number);
-    getMockStateRepositoryData();
+    reportCsv(records): Promise<boolean>;
 }
